@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         四海绩效
 // @namespace    https://sihai.baidu.com/
-// @version      1.0.0
+// @version      1.0.1
 // @description  自动计算并显示本月和上月绩效
 // @author       lijin
 // @match        https://sihai.baidu.com/user-data-center
@@ -401,7 +401,7 @@
 
     const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js';
     const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/lijin-baidu-performance.user.js';
-    const CURRENT_VERSION = '1.0.0';
+    const CURRENT_VERSION = '1.0.1';
 
     function checkUpdate() {
         GM_xmlhttpRequest({
