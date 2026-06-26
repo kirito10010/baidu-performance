@@ -21,7 +21,7 @@
 ## 安装
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器插件
-2. 点击 [绩效计算插件.user.js](https://github.com/kirito10010/baidu-performance/raw/main/绩效计算插件.user.js) 安装
+2. 点击 [baidu-performance.user.js](https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js) 安装
 
 ## 本地服务器
 
