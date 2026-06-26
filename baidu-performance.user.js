@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         四海绩效计算插件
 // @namespace    https://sihai.baidu.com/
-// @version      1.3
+// @version      1.3.1
 // @description  自动计算并显示本月和上月绩效
 // @author       lijin
 // @match        https://sihai.baidu.com/user-data-center
@@ -317,7 +317,7 @@
         periodEl.style.cssText = 'font-size: 12px; color: #888; margin-bottom: 6px;';
 
         const valueEl = document.createElement('div');
-        valueEl.textContent = performance.toFixed(5);
+        valueEl.textContent = performance.toFixed(3);
         valueEl.style.cssText = `
             font-size: 24px; font-weight: 600; color: #1a73e8;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', monospace;
@@ -401,7 +401,7 @@
 
     const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js';
     const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/baidu-performance.user.js';
-    const CURRENT_VERSION = '1.3';
+    const CURRENT_VERSION = '1.3.1';
 
     function checkUpdate() {
         const lastCheck = localStorage.getItem('performance_last_check');
