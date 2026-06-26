@@ -404,12 +404,6 @@
     const CURRENT_VERSION = '1.3.1';
 
     function checkUpdate() {
-        const lastCheck = localStorage.getItem('performance_last_check');
-        const today = new Date().toDateString();
-        if (lastCheck === today) return;
-
-        localStorage.setItem('performance_last_check', today);
-
         GM_xmlhttpRequest({
             method: 'GET',
             url: RAW_VERSION_URL,
@@ -422,14 +416,16 @@
                             if (confirm(`检测到新版本 v${latestVersion}\n当前版本 v${CURRENT_VERSION}\n\n是否立即更新？`)) {
                                 window.open(UPDATE_URL, '_blank');
                             }
+                        } else {
+                            console.log('✓ 插件已是最新版本 v' + CURRENT_VERSION);
                         }
                     }
                 } catch (e) {
-                    console.log('检查更新失败:', e);
+                    console.log('✗ 检查更新失败:', e);
                 }
             },
             onerror: function() {
-                console.log('检查更新失败');
+                console.log('✗ 检查更新失败');
             }
         });
     }
