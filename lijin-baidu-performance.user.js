@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         四海绩效计算插件
+// @name         四海绩效
 // @namespace    https://sihai.baidu.com/
 // @version      1.3.3
 // @description  自动计算并显示本月和上月绩效
