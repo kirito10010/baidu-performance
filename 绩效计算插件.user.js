@@ -6,8 +6,14 @@
 // @author       lijin
 // @match        https://sihai.baidu.com/user-data-center
 // @grant        GM_xmlhttpRequest
+// @grant        GM_notification
 // @connect      sihai.baidu.com
 // @connect      172.16.0.168
+// @connect      raw.githubusercontent.com
+// @connect      github.com
+// @updateURL    https://github.com/kirito10010/baidu-performance/raw/main/绩效计算插件.user.js
+// @downloadURL  https://github.com/kirito10010/baidu-performance/raw/main/绩效计算插件.user.js
+// @run-at       document-end
 // ==/UserScript==
 
 (function() {
@@ -393,8 +399,57 @@
         });
     }
 
+    const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/绩效计算插件.user.js';
+    const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/绩效计算插件.user.js';
+    const CURRENT_VERSION = '1.3';
+
+    function checkUpdate() {
+        const lastCheck = localStorage.getItem('performance_last_check');
+        const today = new Date().toDateString();
+        if (lastCheck === today) return;
+
+        localStorage.setItem('performance_last_check', today);
+
+        GM_xmlhttpRequest({
+            method: 'GET',
+            url: RAW_VERSION_URL,
+            onload: function(response) {
+                try {
+                    const match = response.responseText.match(/@version\s+([\d.]+)/);
+                    if (match) {
+                        const latestVersion = match[1];
+                        if (compareVersions(latestVersion, CURRENT_VERSION) > 0) {
+                            if (confirm(`检测到新版本 v${latestVersion}\n当前版本 v${CURRENT_VERSION}\n\n是否立即更新？`)) {
+                                window.open(UPDATE_URL, '_blank');
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log('检查更新失败:', e);
+                }
+            },
+            onerror: function() {
+                console.log('检查更新失败');
+            }
+        });
+    }
+
+    function compareVersions(v1, v2) {
+        const parts1 = v1.split('.').map(Number);
+        const parts2 = v2.split('.').map(Number);
+        for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+            const p1 = parts1[i] || 0;
+            const p2 = parts2[i] || 0;
+            if (p1 > p2) return 1;
+            if (p1 < p2) return -1;
+        }
+        return 0;
+    }
+
     async function run() {
         try {
+            checkUpdate();
+
             const cycle = getCurrentCycle();
             const checkData = await fetchCheckData();
             const workerName = checkData.data.last_confirm_info?.name || checkData.data.current_confirm_info?.name || '';
