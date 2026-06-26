@@ -317,7 +317,7 @@
         periodEl.style.cssText = 'font-size: 12px; color: #888; margin-bottom: 6px;';
 
         const valueEl = document.createElement('div');
-        valueEl.textContent = performance.toFixed(3);
+        valueEl.textContent = performance.toFixed(5);
         valueEl.style.cssText = `
             font-size: 24px; font-weight: 600; color: #1a73e8;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', monospace;
@@ -367,9 +367,9 @@
             onboard_time: data.personalInfo.onboard_time || '',
             resign_time: data.personalInfo.resign_time || '',
             sign_types_text: data.personalInfo.sign_types_text ? Object.values(data.personalInfo.sign_types_text).join(', ') : '',
-            month_performance: data.monthPerformance.toFixed(3),
+            month_performance: data.monthPerformance.toFixed(5),
             month_date_range: data.monthRange,
-            last_month_performance: data.lastMonthPerformance.toFixed(3),
+            last_month_performance: data.lastMonthPerformance.toFixed(5),
             last_month_date_range: data.lastMonthRange,
             upload_time: new Date().toLocaleString('zh-CN')
         };
