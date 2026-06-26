@@ -11,8 +11,8 @@
 // @connect      172.16.0.168
 // @connect      raw.githubusercontent.com
 // @connect      github.com
-// @updateURL    https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js
-// @downloadURL  https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js
+// @updateURL    https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js
+// @downloadURL  https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js
 // @run-at       document-end
 // ==/UserScript==
 
@@ -399,8 +399,8 @@
         });
     }
 
-    const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js';
-    const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/baidu-performance.user.js';
+    const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js';
+    const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/lijin-baidu-performance.user.js';
     const CURRENT_VERSION = '1.3.1';
 
     function checkUpdate() {

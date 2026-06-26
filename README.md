@@ -21,7 +21,7 @@
 ## 安装
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器插件
-2. 点击 [baidu-performance.user.js](https://github.com/kirito10010/baidu-performance/raw/main/baidu-performance.user.js) 安装
+2. 点击 [lijin-baidu-performance.user.js](https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js) 安装
 
 ## 本地服务器
 
@@ -30,6 +30,13 @@
 数据保存在 `performance_data/` 目录。
 
 ## 更新日志
+
+### v1.3.1
+- 浮窗显示改为保留3位小数
+
+### v1.3
+- 添加自动更新检测功能
+- 文件名改为 lijin-baidu-performance.user.js
 
 ### v1.2
 - 修改绩效计算公式：eff=0时 durations/8，eff≠0时 times/eff
