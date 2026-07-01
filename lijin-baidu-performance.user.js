@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         四海绩效
 // @namespace    https://sihai.baidu.com/
-// @version      1.0.1
+// @version      1.0.2
 // @description  自动计算并显示本月和上月绩效
 // @author       lijin
 // @match        https://sihai.baidu.com/user-data-center
@@ -163,12 +163,13 @@
             prefSum += value;
         });
 
-        const summaryRecords = summaryData.data.data || [];
-        let summarySum = 0;
-        if (summaryRecords.length > 0) {
-            const record = summaryRecords[0];
-            summarySum += parseFloat(record.supplier_standard_perf_day) || 0;
-            summarySum += parseFloat(record.supplier_standard_perf_over_day) || 0;
+        let signCompleteCount = 0;
+        if (signData.data) {
+            signData.data.forEach(item => {
+                if (item.sign_in_time && item.sign_out_time) {
+                    signCompleteCount++;
+                }
+            });
         }
 
         const firstDateStr = prefMonthArray.length > 0 ? prefMonthArray[0].date_str : null;
@@ -184,7 +185,15 @@
             });
         }
 
-        return prefSum - summarySum + signBonus;
+        const result = prefSum - signCompleteCount + signBonus;
+        console.log('========== 本月绩效计算 ==========');
+        console.log(`prefSum = ${prefSum.toFixed(5)} (${prefMonthArray.length}条记录)`);
+        console.log(`signCompleteCount = ${signCompleteCount} (签到签退都完整的记录数)`);
+        console.log(`signBonus = ${signBonus} (pref第一条日期: ${firstDateStr} 之后的完整签到数)`);
+        console.log(`本月绩效 = ${prefSum.toFixed(5)} - ${signCompleteCount} + ${signBonus} = ${result.toFixed(5)}`);
+        console.log('==================================');
+
+        return result;
     }
 
     function calculateLastMonthPerformance(prefData, summaryData) {
@@ -214,7 +223,14 @@
             summarySum += parseFloat(record.supplier_standard_perf_over_day) || 0;
         }
 
-        return lastMonthSum - summarySum;
+        const result = lastMonthSum - summarySum;
+        console.log('========== 上月绩效计算 ==========');
+        console.log(`lastMonthSum = ${lastMonthSum.toFixed(5)} (${lastMonthArray.length}条记录)`);
+        console.log(`summarySum = ${summarySum.toFixed(5)}`);
+        console.log(`上月绩效 = ${lastMonthSum.toFixed(5)} - ${summarySum.toFixed(5)} = ${result.toFixed(5)}`);
+        console.log('==================================');
+
+        return result;
     }
 
     let floatWindow = null;
@@ -401,7 +417,7 @@
 
     const UPDATE_URL = 'https://github.com/kirito10010/baidu-performance/raw/main/lijin-baidu-performance.user.js';
     const RAW_VERSION_URL = 'https://raw.githubusercontent.com/kirito10010/baidu-performance/main/lijin-baidu-performance.user.js';
-    const CURRENT_VERSION = '1.0.1';
+    const CURRENT_VERSION = '1.0.2';
 
     function checkUpdate() {
         GM_xmlhttpRequest({
